@@ -1,22 +1,22 @@
 package com.example.lgs_app.configs
 
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.lgs_app.pages.LoginScreen
+import com.example.lgs_app.composables.login.LoginViewModel
 import com.example.lgs_app.pages.HomePage
-import com.example.lgs_app.pages.LoginPage
 
 @Composable
-fun Routes(controlRoute: NavHostController, paddingValue: PaddingValues) {
+fun Routes(controlRoute: NavHostController) {
+  val viewModel: LoginViewModel = viewModel()
   NavHost(
       controlRoute,
-      startDestination = RoutePath.Login.route,
-      modifier = Modifier.padding(paddingValue)
+      startDestination = RoutePath.Login.route
   ) {
-      composable(RoutePath.Login.route) { LoginPage(controlRoute) }
+    composable(RoutePath.Login.route) { LoginScreen(viewModel, controlRoute) }
+    composable(RoutePath.Home.route) { HomePage(controlRoute) }
   }
 }
